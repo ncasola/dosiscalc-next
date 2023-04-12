@@ -10,19 +10,23 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
-    "bootstrap": "^5.2.3",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "konsta": "^1.0.2",
     "moongose": "^1.0.0",
     "next": "13.3.0",
     "next-auth": "^4.22.0",
     "next-connect": "^0.13.0",
     "react": "18.2.0",
-    "react-bootstrap": "^2.7.2",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
     "redux-persist": "^6.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.1"
   }
 }

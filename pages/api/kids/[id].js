@@ -16,23 +16,31 @@ const handler = nc({
   .use(async (req, res, next) => {
     const session = await getServerSession(req, res, authOptions);
     if (session) {
-      req.user = session.user;
-      next();
+        // add user to req
+        req.user = session.user;
+        next();
     } else {
       res.status(401).end("Unauthorized");
     }
   })
   .get(async (req, res) => {
     await dbConnect();
+    const id_kid = req.query.id;
     const user = req.user;
-    const kids = await KidModel.find({ user: user.id });
-    res.json(kids);
+    const kid = await KidModel.findOne({ _id: id_kid, user: user.id });
+    res.json(kid);
   })
-  .post(async (req, res) => {
+  .put(async (req, res) => {
     await dbConnect();
-    const newKid = req.body;
-    newKid.user = req.user.id;
-    const kid = await KidModel.create(newKid);
+    const id_kid = req.query.id;
+    const user = req.user;
+    const kid = await KidModel.updateOne({ _id: id_kid, user: user.id }, req.body);
+    res.json(kid);
+  })
+  .delete(async (req, res) => {
+    await dbConnect();
+    const id_kid = req.query.id;
+    const kid = await KidModel.deleteOne({ _id: id_kid, user: user.id });
     res.json(kid);
   });
 

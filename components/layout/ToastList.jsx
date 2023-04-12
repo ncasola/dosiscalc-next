@@ -1,33 +1,39 @@
-import React from 'react'
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Toast } from "react-bootstrap";
 import { removeToast } from "../../store/toast.slice";
-import ToastContainer from 'react-bootstrap/ToastContainer';
+import { Button, Toast, Block } from "konsta/react";
 
 const ToastList = () => {
-    const toasts = useSelector((state) => state.toast.toasts);
-    const dispatch = useDispatch();
+  const toasts = useSelector((state) => state.toast.toasts);
+  const dispatch = useDispatch();
   return (
-    <ToastContainer position="bottom-start" className="p-3">
-    {toasts.map((toast) => (
+    <Block strongIos outlineIos className="space-y-4">
+      {toasts.map((toast) => (
       <Toast
         key={toast.id}
-        onClose={() => dispatch(removeToast(toast.id))}
-        delay={3000}
-        bg={toast.type}
-        autohide
+        position="center"
+        opened={true}
+        colors={{
+          bg: toast.type,
+          text: "white",
+        }}
+        button={
+          <Button
+            rounded
+            clear
+            small
+            inline
+            onClick={() => dispatch(removeToast(toast.id))}
+          >
+            Cerrar
+          </Button>
+        }
       >
-        <Toast.Header closeButton={false}>
-          <strong className="mr-auto">{toast.title ? toast.title : "Notificación"}</strong>
-          <small className='ms-2'>Hace un segundo</small>
-        </Toast.Header>
-        <Toast.Body>
-          <p>{toast.text}</p>
-        </Toast.Body>
+        <div className="shrink">{toast.text}</div>
       </Toast>
-    ))}
-    </ToastContainer>
-  )
-}
+      ))}
+    </Block>
+  );
+};
 
-export default ToastList
+export default ToastList;

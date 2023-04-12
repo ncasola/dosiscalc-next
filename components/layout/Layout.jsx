@@ -1,16 +1,14 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-import Header from "./Header";
+import { App, Page } from 'konsta/react';
 import ToastList from "./ToastList";
 const Layout = ({ children }) => {
   return (
-    <>
-      <Header />
-      <Container className="app">
-        <main>{children}</main>
-      </Container>
-      <ToastList />
-    </>
+      <App theme="material" safeAreas>
+        <Page>
+          { children }
+          <ToastList />
+        </Page>
+      </App>
   );
 };
 
