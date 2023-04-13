@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { List, ListInput, ListItem, Range, Fab } from "konsta/react";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdCached } from "react-icons/md";
 
 const KidForm = ({ kid, kidRegister }) => {
   const {
@@ -103,7 +103,7 @@ const KidForm = ({ kid, kidRegister }) => {
         <Fab    
             className="fixed left-4-safe bottom-4-safe z-20 k-color-brand-green"
             onClick={() => handleSubmit(onSubmit)()}
-            icon={<MdAdd />}
+            icon={kid ? <MdCached /> : <MdAdd /> }
         />
     </>
   );

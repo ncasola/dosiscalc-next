@@ -1,9 +1,10 @@
 import React from 'react'
-import { Preloader } from 'konsta/react'
 
 const LoadingSpin = () => {
   return (
-    <Preloader />
+    <div className="loading-spin">
+      Cargando...
+    </div>
   )
 }
 

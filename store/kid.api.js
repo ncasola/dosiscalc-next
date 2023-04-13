@@ -32,10 +32,10 @@ export const kidApi = createApi({
       invalidatesTags: (result, error, arg) => [{ type: "Kid", id: "LIST" }],
     }),
     updateKid: builder.mutation({
-      query: ({ id, update }) => ({
+      query: ({ id, data }) => ({
         url: `/kids/${id}`,
-        method: "PATCH",
-        body: update,
+        method: "PUT",
+        body: data,
       }),
       invalidatesTags: (result, error, arg) => [{ type: "Kid", id: arg.id }],
     }),

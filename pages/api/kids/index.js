@@ -25,13 +25,13 @@ const handler = nc({
   .get(async (req, res) => {
     await dbConnect();
     const user = req.user;
-    const kids = await KidModel.find({ user: user.id });
+    const kids = await KidModel.find({ user: user.email });
     res.json(kids);
   })
   .post(async (req, res) => {
     await dbConnect();
     const newKid = req.body;
-    newKid.user = req.user.id;
+    newKid.user = req.user.email;
     const kid = await KidModel.create(newKid);
     res.json(kid);
   });

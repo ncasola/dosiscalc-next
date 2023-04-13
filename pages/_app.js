@@ -8,6 +8,7 @@ import Layout from "@/components/layout/Layout";
 import LoadingSpin from "@/components/layout/LoadingSpin";
 // styles
 import "@/styles/globals.css";
+import "@/styles/loading.css";
 
 export default function MyApp({
   Component,

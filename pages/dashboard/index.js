@@ -11,7 +11,6 @@ import {
   Badge,
   List,
   ListItem,
-  Navbar,
   BlockTitle,
   Fab,
   Actions,
@@ -19,6 +18,7 @@ import {
   ActionsLabel,
   ActionsButton,
 } from "konsta/react";
+import MainNavbar from "@/components/layout/MainNavbar";
 
 export default function Dashboard() {
   const { data: kids, error, isLoading } = useGetKidsQuery();
@@ -45,10 +45,10 @@ export default function Dashboard() {
   return (
     <>
       {isLoading && <LoadingSpin />}
-      <Navbar title="DosisCalc" />
+      <MainNavbar subtitle={"Dashboard"} />
       <BlockTitle>Listado hijos</BlockTitle>
       {kids && kids.length > 0 && (
-        <List strongMaterial outlineMaterial>
+        <List strong outline inset>
           {kids.map((kid) => (
             <ListItem
               key={kid["_id"]}
@@ -74,7 +74,7 @@ export default function Dashboard() {
       )}
       <Link href="/dashboard/add" passHref>
         <Fab
-          className="fixed left-1/2 bottom-4-safe transform -translate-x-1/2 z-20"
+          className="fixed right-4-safe bottom-4-safe z-20"
           text="Agregar hijo"
           icon={<MdAdd />}
           component="a"
@@ -90,16 +90,15 @@ export default function Dashboard() {
             onClick={() => router.push(`/dashboard/view/${selectedKid["_id"]}`)}
             bold
           >
-            <MdPanoramaFishEye /> {" Ver"}
+            Ver dosis
           </ActionsButton>
           <ActionsButton
             onClick={() => router.push(`/dashboard/edit/${selectedKid["_id"]}`)}
-            bold
           >
-            <MdEdit /> {" Editar"}
+            Editar datos
           </ActionsButton>
           <ActionsButton onClick={() => deleteKidAction()} bold>
-            <MdRemove /> {" Borrar"}
+            Borrar datos
           </ActionsButton>
         </ActionsGroup>
       </Actions>

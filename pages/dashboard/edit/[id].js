@@ -1,7 +1,6 @@
 import React from "react";
 import { useUpdateKidMutation, useGetKidQuery } from "@/store/kid.api";
 import {
-  Navbar,
   Fab,
 } from "konsta/react";
 import { useDispatch } from "react-redux";
@@ -10,6 +9,7 @@ import { useRouter } from "next/router";
 import KidForm from "@/components/kids/KidForm";
 import LoadingSpin from "@/components/layout/LoadingSpin";
 import { MdUndo } from "react-icons/md";
+import MainNavbar from "@/components/layout/MainNavbar";
 
 export default function EditDashboard() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function EditDashboard() {
   const { data: kid, isLoading } = useGetKidQuery(id);
   const [editKid] = useUpdateKidMutation();
   const onSubmit = async (data) => {
-    const newKid = await editKid(data);
+    const newKid = await editKid({ id: kid["_id"], data });
     if (newKid) {
       dispatch(
         addToast({
@@ -31,7 +31,7 @@ export default function EditDashboard() {
   };
   return (
     <>
-      <Navbar title="Actualizar hijo" />
+      <MainNavbar subtitle="Actualizar hijo" />
         {isLoading && <LoadingSpin />}
         {kid && <KidForm kidRegister={onSubmit} kid={kid} />}
         <Fab 

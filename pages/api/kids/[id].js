@@ -27,20 +27,20 @@ const handler = nc({
     await dbConnect();
     const id_kid = req.query.id;
     const user = req.user;
-    const kid = await KidModel.findOne({ _id: id_kid, user: user.id });
+    const kid = await KidModel.findOne({ _id: id_kid, user: user.email });
     res.json(kid);
   })
   .put(async (req, res) => {
     await dbConnect();
     const id_kid = req.query.id;
     const user = req.user;
-    const kid = await KidModel.updateOne({ _id: id_kid, user: user.id }, req.body);
+    const kid = await KidModel.updateOne({ _id: id_kid, user: user.email }, req.body);
     res.json(kid);
   })
   .delete(async (req, res) => {
     await dbConnect();
     const id_kid = req.query.id;
-    const kid = await KidModel.deleteOne({ _id: id_kid, user: user.id });
+    const kid = await KidModel.deleteOne({ _id: id_kid, user: user.email });
     res.json(kid);
   });
 
