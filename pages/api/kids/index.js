@@ -7,7 +7,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 const handler = nc({
   onError: (err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).end("Something broke!");
+    res.json({ error: err.message });
   },
   onNoMatch: (req, res) => {
     res.status(404).end("Page is not found");

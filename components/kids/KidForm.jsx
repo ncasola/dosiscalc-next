@@ -2,14 +2,21 @@ import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { List, ListInput, ListItem, Range, Fab } from "konsta/react";
 import { MdAdd, MdCached } from "react-icons/md";
+import * as Yup from "yup";
 
 const KidForm = ({ kid, kidRegister }) => {
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("El nombre es requerido"),
+    age: Yup.number().min(0).max(12).required("La edad es requerida"),
+    weight: Yup.number().min(0).max(35).required("El peso es requerido"),
+  });
+  const formOptions = { resolver: yupResolver(validationSchema) };
   const {
     reset,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm();
+  } = useForm(formOptions);
 
   const onSubmit = (data) => {
     kidRegister(data);

@@ -1,14 +1,45 @@
 import NextAuth from "next-auth";
-import Auth0Provider from "next-auth/providers/auth0";
+import CredentialsProvider from "next-auth/providers/credentials";
+import dbConnect from "@/helpers/dbConnect";
+import User from "@/models/User.model";
 
 export const authOptions = {
   providers: [
-    Auth0Provider({
-      clientId: process.env.AUTH0_CLIENT_ID,
-      clientSecret: process.env.AUTH0_CLIENT_SECRET,
-      issuer: process.env.AUTH0_ISSUER,
+    CredentialsProvider({
+      id: "credentials",
+      name: "credentials",
+      async authorize(credentials) {
+        await dbConnect();
+        const user = await User.findOne({ email: credentials.email });
+        if (!user) {
+          throw new Error("No se encontró el usuario");
+        }
+        const isPasswordMatch = await user.isPasswordMatch(credentials.password);
+        if (!isPasswordMatch) {
+          throw new Error("Contraseña incorrecta");
+        }
+        return user;
+      },
     }),
   ],
+  secret: process.env.JWT_SECRET,
+  pages: {
+    signIn: "/login",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user = token.user;
+      return session;
+    },
+  },
+  // Enable debug messages in the console if you are having problems
+  debug: process.env.NODE_ENV === "development",
 };
 
 export default NextAuth(authOptions);
