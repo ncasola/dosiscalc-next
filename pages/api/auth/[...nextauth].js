@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "@/helpers/dbConnect";
 import User from "@/models/User.model";
+import { verify } from "hcaptcha";
 
 export const authOptions = {
   providers: [
@@ -10,6 +11,12 @@ export const authOptions = {
       name: "credentials",
       async authorize(credentials) {
         await dbConnect();
+        const hcaptcha = credentials.hcaptcha;
+        const secret = process.env.HCAPTCHA_SECRET_KEY;
+        const response = await verify(secret, hcaptcha);
+        if (!response.success) {
+          throw new Error("Captcha no válido");
+        }
         const user = await User.findOne({ email: credentials.email });
         if (!user) {
           throw new Error("No se encontró el usuario");

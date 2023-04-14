@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { List, ListInput, ListItem, Range, Fab } from "konsta/react";
 import { MdAdd, MdCached } from "react-icons/md";
 import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const KidForm = ({ kid, kidRegister }) => {
   const validationSchema = Yup.object().shape({
@@ -108,7 +109,7 @@ const KidForm = ({ kid, kidRegister }) => {
         </List>
       </form>
         <Fab    
-            className="fixed left-4-safe bottom-4-safe z-20 k-color-brand-green"
+            className="fixed left-1/2 bottom-4-safe transform -translate-x-1/2 z-20"
             onClick={() => handleSubmit(onSubmit)()}
             icon={kid ? <MdCached /> : <MdAdd /> }
         />

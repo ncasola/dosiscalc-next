@@ -7,22 +7,39 @@ import {
   MdPassword,
   MdOutlineSendToMobile,
 } from "react-icons/md";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { useEffect, useRef, useState } from "react";
 
 const RegisterForm = ({ processRegister }) => {
+  const [token, setToken] = useState(null);
+  const captchaRef = useRef(null);
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("El nombre es obligatorio"),
     email: Yup.string()
       .email("El email es incorrecto")
       .required("El email es obligatorio"),
     password: Yup.string().min(8, "La contraseña debe tener al menos 8 caracteres").required("La contraseña es obligatoria"),
+    hcaptcha: Yup.string().required("El captcha es obligatorio"),
   });
   const formOptions = { resolver: yupResolver(validationSchema), mode: "onTouched", reValidateMode: "onChange" };
 
   const {
+    register,
+    reset,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm(formOptions);
+
+  const onLoad = () => {
+    captchaRef.current.execute();
+  };
+
+  useEffect(() => {
+    if (token) {
+      reset({ hcaptcha: token });
+    }
+  }, [token, reset]);
 
   return (
     <>
@@ -80,9 +97,20 @@ const RegisterForm = ({ processRegister }) => {
             )}
           />
         </List>
+        <input type="hidden" {...register("hcaptcha")} />
+        <p className="text-center text-red-500">{errors.hcaptcha?.message}</p>
+        <div className="flex justify-center">
+        <HCaptcha
+          sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY}
+          onLoad={onLoad}
+          onVerify={setToken}
+          ref={captchaRef}
+          className="mx-auto"
+        />
+        </div>
       </form>
       <Fab
-        className="fixed right-4-safe bottom-4-safe z-20 k-color-brand-green"
+        className="fixed left-1/2 bottom-4-safe transform -translate-x-1/2 z-20"
         onClick={() => handleSubmit(processRegister)()}
         icon={<MdOutlineSendToMobile />}
       />

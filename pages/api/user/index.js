@@ -1,6 +1,7 @@
 import nc from "next-connect";
 import dbConnect from "@/helpers/dbConnect";
 import User from "@/models/User.model";
+import { verify } from "hcaptcha";
 
 const handler = nc({
     onError: (err, req, res, next) => {
@@ -11,6 +12,17 @@ const handler = nc({
       res.status(404).end("No se encontró la página");
     },
   })
+    .use(async (req, res, next) => {
+      const { hcaptcha } = req.body;
+      const secret = process.env.HCAPTCHA_SECRET_KEY;
+      const response = await verify(secret, hcaptcha);
+      if(response.success) {
+        console.log(response);
+        next();
+      } else {
+        res.json({error: "Captcha no válido"});
+      }
+    })
     .post(async (req, res) => {
       await dbConnect();
       const newUser = req.body;

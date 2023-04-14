@@ -39,3 +39,6 @@ next-env.d.ts
 
 #mongodb
 mongo_db
+
+#compose
+docker-compose.prod.yml

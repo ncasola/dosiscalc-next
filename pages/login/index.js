@@ -21,6 +21,7 @@ export default function Login({ csrfToken }) {
       redirect: false,
       email: data.email,
       password: data.password,
+      hcaptcha: data.hcaptcha,
     });
     if (result.status === 200) {
       router.push("/dashboard");

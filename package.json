@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hcaptcha/react-hcaptcha": "^1.8.1",
     "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^3.0.1",
     "@reduxjs/toolkit": "^1.9.3",
@@ -16,6 +17,7 @@
     "bcryptjs": "^2.4.3",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "hcaptcha": "^0.1.1",
     "konsta": "^1.0.2",
     "mongodb": "^4.15.0",
     "moongose": "^1.0.0",
