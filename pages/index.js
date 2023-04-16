@@ -5,7 +5,6 @@ import { Block, BlockTitle } from "konsta/react";
 import MainNavbar from "@/components/layout/MainNavbar";
 
 export default function Home() {
-  console.log(process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY);
   const router = useRouter()
   const { data: session } = useSession();
   useEffect(() => {
