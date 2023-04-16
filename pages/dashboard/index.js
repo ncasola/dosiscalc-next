@@ -6,7 +6,7 @@ import { useGetKidsQuery, useDeleteKidMutation } from "@/store/kid.api";
 import { addToast } from "@/store/toast.slice";
 import LoadingSpin from "@/components/layout/LoadingSpin";
 import { FaUserAstronaut } from "react-icons/fa";
-import { MdAdd, MdRemove, MdEdit, MdPanoramaFishEye } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 import {
   Badge,
   List,

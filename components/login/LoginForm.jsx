@@ -96,6 +96,7 @@ const LoginForm = ({ csrfToken, processLogin }) => {
         className="fixed left-1/2 bottom-4-safe transform -translate-x-1/2 z-20"
         onClick={() => handleSubmit(processLogin)()}
         icon={<MdOutlineSendToMobile />}
+        text="Iniciar Sesión"
       />
     </>
   );

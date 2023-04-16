@@ -5,9 +5,6 @@ import { useRouter } from "next/router";
 import LoadingSpin from "@/components/layout/LoadingSpin";
 import Dosis from "@/components/kids/Dosis";
 import Image from "next/image";
-import Apiretal from "@/assets/Apiretal.png";
-import Dalsy20 from "@/assets/Dalsy 20.png";
-import Dalsy40 from "@/assets/Dalsy 40.png";
 import MainNavbar from "@/components/layout/MainNavbar";
 import { MdUndo } from "react-icons/md";
 
@@ -59,7 +56,7 @@ export default function ViewDashboard() {
               media={
                 <Image
                   className="material:rounded-full material:w-10"
-                  src={Apiretal}
+                  src='/Apiretal.png'
                   width="120"
                   height="120"
                   alt="Apiretal"
@@ -74,7 +71,7 @@ export default function ViewDashboard() {
               media={
                 <Image
                   className="material:rounded-full material:w-10"
-                  src={Dalsy20}
+                  src='/Dalsy20.png'
                   width="120"
                   height="120"
                   alt="Dalsy 20"
@@ -89,7 +86,7 @@ export default function ViewDashboard() {
               media={
                 <Image
                   className="material:rounded-full material:w-10"
-                  src={Dalsy40}
+                  src='/Dalsy40.png'
                   width="120"
                   height="120"
                   alt="Dalsy 40"
