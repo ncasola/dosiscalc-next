@@ -17,7 +17,6 @@ const handler = nc({
       const secret = process.env.HCAPTCHA_SECRET_KEY;
       const response = await verify(secret, hcaptcha);
       if(response.success) {
-        console.log(response);
         next();
       } else {
         res.json({error: "Captcha no válido"});

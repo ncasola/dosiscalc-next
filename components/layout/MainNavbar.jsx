@@ -29,9 +29,6 @@ const MainNavbar = ({ subtitle }) => {
           ) : (
             <Button onClick={() => signIn("auth0")}>Iniciar Sesión</Button>
           )}
-          <Link href="/privacidad" className="mx-2">
-            <Button outline>Privacidad</Button>
-          </Link>
         </>
       }
     />

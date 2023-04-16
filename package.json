@@ -21,7 +21,7 @@
     "konsta": "^1.0.2",
     "mongodb": "^4.15.0",
     "moongose": "^1.0.0",
-    "next": "13.3.0",
+    "next": "^13.2.4",
     "next-auth": "^4.22.0",
     "next-connect": "^0.13.0",
     "react": "18.2.0",
