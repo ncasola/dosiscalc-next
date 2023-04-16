@@ -10,7 +10,11 @@ services:
     volumes:
       - ./mongo_db:/data/db
   dosiscalc_web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_HCAPTCHA_SITE_KEY: '10000000-ffff-ffff-ffff-000000000001'
     container_name: dosiscalc_web
     restart: always
     ports:
@@ -20,5 +24,4 @@ services:
       NEXTAUTH_URL: http://localhost:3001
       JWT_SECRET: zK7M9uTlK0zmO1Z1Q11KZVmiqIHA6rrf
       NEXTAUTH_SECRET: hEcDZwd561kHQTgkRYbCONzBbdAtOnVh
-      NEXT_PUBLIC_HCAPTCHA_SITE_KEY: '10000000-ffff-ffff-ffff-000000000001'
       HCAPTCHA_SECRET_KEY: '0x0000000000000000000000000000000000000000'
