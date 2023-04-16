@@ -3,7 +3,7 @@ import { Navbar, Button } from "konsta/react";
 import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-
+import Logo from "../../public/logo.png";
 const MainNavbar = ({ subtitle }) => {
   const { data: session } = useSession();
   return (
@@ -14,7 +14,7 @@ const MainNavbar = ({ subtitle }) => {
       left={
         <Link href="/dashboard">
           <Image
-            src="/logo.png"
+            src={Logo}
             alt="DosisCalc"
             width={40}
             height={40}
