@@ -40,6 +40,7 @@ const handler = nc({
   .delete(async (req, res) => {
     await dbConnect();
     const id_kid = req.query.id;
+    const user = req.user;
     const kid = await KidModel.deleteOne({ _id: id_kid, user: user.email });
     res.json(kid);
   });

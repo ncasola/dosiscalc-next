@@ -1,27 +1,27 @@
 version: '3'
 
 services:
-  mongodb:
+  dosiscalc_db:
     image: mongo:4.2.1-bionic
-    container_name: mongodb_dosiscalc
+    container_name: dosiscalc_db
     restart: always
     ports:
       - '27017:27017'
     volumes:
       - ./mongo_db:/data/db
   dosiscalc_web:
+    container_name: dosiscalc_web
+    restart: always
+    ports:
+      - '3001:3000'
     build:
       context: .
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_HCAPTCHA_SITE_KEY: '10000000-ffff-ffff-ffff-000000000001'
-    container_name: dosiscalc_web
-    restart: always
-    ports:
-      - '3001:3000'
     environment:
-      MONGODB_URI: mongodb://mongodb_dosiscalc:27017/dosiscalc
+      MONGODB_URI: mongodb://dosiscalc_db:27017/dosiscalc
       NEXTAUTH_URL: http://localhost:3001
-      JWT_SECRET: zK7M9uTlK0zmO1Z1Q11KZVmiqIHA6rrf
-      NEXTAUTH_SECRET: hEcDZwd561kHQTgkRYbCONzBbdAtOnVh
-      HCAPTCHA_SECRET_KEY: '0x0000000000000000000000000000000000000000'
+      JWT_SECRET: "H0jqHSXXBvNFBMuIkmrdD509tY82DXeR"
+      NEXTAUTH_SECRET: "TgB3bBg6qJIU3f4CSBsJ4f6NSKsYC56F"
+      HCAPTCHA_SECRET_KEY: "0x0000000000000000000000000000000000000000"
