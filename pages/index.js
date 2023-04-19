@@ -18,9 +18,7 @@ export default function Home() {
       <BlockTitle>DosisCalc</BlockTitle>
       <Block strong inset outline>
         <p>
-          Donec et nulla auctor massa pharetra adipiscing ut sit amet sem.
-          Suspendisse molestie velit vitae mattis tincidunt. Ut sit amet quam
-          mollis, vulputate turpis vel, sagittis felis.
+          DosisCalc es una web app que te permite calcular la dosis de medicamentos como Apiretal, Paracetamol, Ibuprofeno, etc.
         </p>
       </Block>
     </>

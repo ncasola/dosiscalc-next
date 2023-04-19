@@ -3,10 +3,12 @@ import { Block, BlockTitle } from "konsta/react";
 import MainNavbar from "@/components/layout/MainNavbar";
 
 export default function Privacidad() {
+
   return (
     <>
         <MainNavbar subtitle={"Política de privacidad"} />
-        <Block strong inset outline>
+        <BlockTitle className="text-center">Política de privacidad</BlockTitle>
+        <Block strong inset outline className="overflow-y-auto h-4/6">
         <h2 style={{marginRight: '0cm', marginLeft: '0cm', fontSize: '24px', fontFamily: '"Times New Roman",serif', fontWeight: 'bold'}}>POLÍTICA DE PRIVACIDAD DEL SITIO WEB</h2>
         <h4 style={{marginRight: '0cm', marginLeft: '0cm', fontSize: '16px', fontFamily: '"Times New Roman",serif', fontWeight: 'bold'}}>https://dosiscalc.es/</h4>
         <h3 style={{marginRight: '0cm', marginLeft: '0cm', fontSize: '18px', fontFamily: '"Times New Roman",serif', fontWeight: 'bold'}}>I. POLÍTICA DE PRIVACIDAD Y PROTECCIÓN DE DATOS</h3>

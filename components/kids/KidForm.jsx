@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { List, ListInput, ListItem, Range, Fab } from "konsta/react";
+import { List, ListInput, ListItem, Range, Button } from "konsta/react";
 import { MdAdd, MdCached } from "react-icons/md";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Link from "next/link";
 
 const KidForm = ({ kid, kidRegister }) => {
   const validationSchema = Yup.object().shape({
@@ -30,9 +31,9 @@ const KidForm = ({ kid, kidRegister }) => {
 
   return (
     <>
-      <form>
-        <List>
-          <Controller
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <List strongMaterial insetMaterial>
+        <Controller
             name="name"
             control={control}
             defaultValue=""
@@ -40,20 +41,18 @@ const KidForm = ({ kid, kidRegister }) => {
             render={({ field }) => (
               <ListInput
                 {...field}
+                outline
                 label="Nombre"
                 type="text"
-                placeholder="Nombre"
                 media={<MdAdd />}
                 error={errors.name && "Nombre es requerido"}
               />
             )}
           />
-        </List>
-        <List strongMaterial insetMaterial>
           <Controller
             name="age"
             control={control}
-            defaultValue=""
+            defaultValue="6"
             rules={{ required: true }}
             render={({ field }) => (
               <ListItem
@@ -81,7 +80,7 @@ const KidForm = ({ kid, kidRegister }) => {
           <Controller
             name="weight"
             control={control}
-            defaultValue=""
+            defaultValue="15"
             rules={{ required: true }}
             render={({ field }) => (
               <ListItem
@@ -106,14 +105,37 @@ const KidForm = ({ kid, kidRegister }) => {
               />
             )}
           />
+          <ListItem
+            innerClassName="flex space-x-4"
+            innerChildren={
+                    <Button
+            className="w-full"
+            type="submit"
+          >
+            {kid ? (
+              <>
+                <MdCached />
+                <span>Actualizar</span>
+              </>
+            ) : (
+              <>
+                <MdAdd />
+                <span>Agregar</span>
+              </>
+            )}
+          </Button>
+
+            }
+          />
         </List>
+        <div className="flex justify-center">
+          <Link href="/dashboard">
+            <Button tonal className="w-full">
+                Regresar
+            </Button>
+          </Link>
+        </div>
       </form>
-        <Fab    
-            className="fixed left-1/2 bottom-4-safe transform -translate-x-1/2 z-20"
-            onClick={() => handleSubmit(onSubmit)()}
-            icon={kid ? <MdCached /> : <MdAdd /> }
-            text={kid ? "Actualizar" : "Agregar"}
-        />
     </>
   );
 };

@@ -37,14 +37,14 @@ export const kidApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: (result, error, arg) => [{ type: "Kid", id: arg.id }],
+      invalidatesTags: (result, error, arg) => [{ type: "Kid", id: arg.id }, { type: "Kid", id: "LIST" }],
     }),
     deleteKid: builder.mutation({
       query: (id) => ({
         url: `/kids/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, arg) => [{ type: "Kid", id: arg }],
+      invalidatesTags: (result, error, arg) => [{ type: "Kid", id: arg }, { type: "Kid", id: "LIST" }],
     }),
   }),
 });

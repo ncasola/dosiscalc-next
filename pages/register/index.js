@@ -8,6 +8,7 @@ import RegisterForm from "@/components/login/RegisterForm";
 import LoadingSpin from "@/components/layout/LoadingSpin";
 import { useDispatch } from "react-redux";
 import { addToast } from "@/store/toast.slice";
+import { BlockTitle, Block } from "konsta/react";
 
 export default function Register() {
   // hooks
@@ -51,9 +52,12 @@ export default function Register() {
     <>
       <MainNavbar subtitle="Registrarse" />
       {isLoading && <LoadingSpin />}
-      <RegisterForm
-        processRegister={processRegister}
-      />
+      <BlockTitle className="text-center mt-4">Registro</BlockTitle>  
+      <Block inset className="flex justify-center">
+        <RegisterForm
+          processRegister={processRegister}
+        />
+      </Block>
     </>
   );
 }
