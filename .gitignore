@@ -43,3 +43,6 @@ mongo_db
 #compose
 docker-compose.prod.yml
 build.sh
+
+# pwa files in public
+/public/*.js*

@@ -1,11 +1,13 @@
 import React from "react";
 import { Navbar, Button } from "konsta/react";
 import Image from "next/image";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Logo from "../../public/logo.png";
 const MainNavbar = ({ subtitle }) => {
   const { data: session } = useSession();
+  const router = useRouter();
   return (
     <Navbar
       title={<Link href="/dashboard">DosisCalc</Link>}
@@ -27,7 +29,7 @@ const MainNavbar = ({ subtitle }) => {
           {session ? (
             <Button onClick={() => signOut()}>Cerrar Sesión</Button>
           ) : (
-            <Button onClick={() => signIn("auth0")}>Iniciar Sesión</Button>
+            <Button onClick={() => router.push("/login")}>Iniciar Sesión</Button>
           )}
         </>
       }

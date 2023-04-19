@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { useGetKidsQuery, useDeleteKidMutation } from "@/store/kid.api";
@@ -12,11 +11,12 @@ import {
   List,
   ListItem,
   BlockTitle,
-  Fab,
   Actions,
   ActionsGroup,
   ActionsLabel,
   ActionsButton,
+  Button,
+  Block,
 } from "konsta/react";
 import MainNavbar from "@/components/layout/MainNavbar";
 
@@ -31,13 +31,24 @@ export default function Dashboard() {
     setSelectedKid(kid);
     setActionsOpened(true);
   };
+
+  const pruebas = () => {
+    dispatch(
+      addToast({
+        title: "Hijo eliminado",
+        message: "Eliminado",
+        type: "bg-red-500",
+      })
+    );
+  };
+
   const deleteKidAction = async () => {
     await deleteKid(selectedKid["_id"]);
     setActionsOpened(false);
     dispatch(
       addToast({
         title: "Hijo eliminado",
-        message: "Se ha eliminado un hijo",
+        message: "Eliminado",
         type: "bg-red-500",
       })
     );
@@ -47,8 +58,9 @@ export default function Dashboard() {
       {isLoading && <LoadingSpin />}
       <MainNavbar subtitle={"Dashboard"} />
       <BlockTitle>Listado hijos</BlockTitle>
+      <Block>
       {kids && kids.length > 0 && (
-        <List strong outline inset>
+        <List strong outline inset className="overflow-y-auto h-4/6">
           {kids.map((kid) => (
             <ListItem
               key={kid["_id"]}
@@ -68,18 +80,19 @@ export default function Dashboard() {
         </List>
       )}
       {kids && kids.length === 0 && (
-        <List strongMaterial outlineMaterial>
+        <List strong>
           <ListItem title="No hay hijos" media={<FaUserAstronaut />} />
         </List>
       )}
-      <Link href="/dashboard/add" passHref>
-        <Fab
-          className="fixed right-4-safe bottom-4-safe z-20"
-          text="Agregar hijo"
-          icon={<MdAdd />}
-          component="a"
-        />
-      </Link>
+            <div className="flex justify-center">
+      <Button
+              className="w-full mr-2"
+              onClick={() => router.push("/dashboard/add")}
+            >
+              <MdAdd /> Agregar hijo
+            </Button>
+            </div>
+            </Block>
       <Actions
         opened={actionsOpened}
         onBackdropClick={() => setActionsOpened(false)}

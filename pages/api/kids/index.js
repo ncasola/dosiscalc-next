@@ -29,6 +29,7 @@ const handler = nc({
     res.json(kids);
   })
   .post(async (req, res) => {
+    console.log(req.body);
     await dbConnect();
     const newKid = req.body;
     newKid.user = req.user.email;

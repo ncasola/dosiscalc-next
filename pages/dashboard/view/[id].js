@@ -1,7 +1,8 @@
 import React from "react";
 import { useGetKidQuery } from "@/store/kid.api";
-import { Fab, BlockTitle, List, ListItem } from "konsta/react";
+import { Button, BlockTitle, List, ListItem } from "konsta/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import LoadingSpin from "@/components/layout/LoadingSpin";
 import Dosis from "@/components/kids/Dosis";
 import Image from "next/image";
@@ -9,16 +10,12 @@ import Apiretal from "../../../public/Apiretal.png";
 import Dalsy20 from "../../../public/Dalsy20.png";
 import Dalsy40 from "../../../public/Dalsy40.png";
 import MainNavbar from "@/components/layout/MainNavbar";
-import { MdUndo } from "react-icons/md";
 
 export default function ViewDashboard() {
   const router = useRouter();
   const [id, setId] = React.useState("");
   const { data: kid, isLoading } = useGetKidQuery(id);
   const [haveToUpdate, setHaveToUpdate] = React.useState(false);
-  const roundToTwo = (num) => {
-    return +(Math.round(num + "e+2") + "e-2");
-  };
 
   React.useEffect(() => {
     if (router.isReady) {
@@ -97,6 +94,13 @@ export default function ViewDashboard() {
               }
             />
           </List>
+          <div className="flex justify-center">
+          <Link href="/dashboard">
+            <Button tonal className="w-full">
+                Regresar
+            </Button>
+          </Link>
+        </div>
         </>
       )}
       {haveToUpdate && (
@@ -108,11 +112,6 @@ export default function ViewDashboard() {
           <p>Hace un mes que no se actualizan los datos del peso</p>
         </div>
       )}
-      <Fab
-        className="fixed right-4-safe bottom-4-safe z-20"
-        onClick={() => router.push("/dashboard")}
-        icon={<MdUndo />}
-      />
     </>
   );
 }

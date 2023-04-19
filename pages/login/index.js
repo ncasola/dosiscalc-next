@@ -6,7 +6,7 @@ import MainNavbar from "@/components/layout/MainNavbar";
 import Link from "next/link";
 // components
 import LoginForm from "@/components/login/LoginForm";
-import { BlockTitle } from "konsta/react";
+import { BlockTitle, Block, Button } from "konsta/react";
 import { useDispatch } from "react-redux";
 import { addToast } from "@/store/toast.slice";
 
@@ -47,15 +47,21 @@ export default function Login({ csrfToken }) {
   return (
     <>
       <MainNavbar subtitle="Iniciar sesión" />
-      <LoginForm
-        processLogin={processLogin}
-        csrfToken={csrfToken}
-      />
-      <BlockTitle className="text-center mt-4">
-        <Link href="/register">
-            ¿No tienes cuenta?
-        </Link>
-      </BlockTitle>
+      <BlockTitle className="text-center mt-4">Login</BlockTitle>
+      <Block inset className="flex justify-center">
+        <LoginForm processLogin={processLogin} csrfToken={csrfToken} />
+      </Block>
+      <BlockTitle className="text-center mt-4">Enlaces</BlockTitle>
+      <Block inset className="space-y-2">
+        <div className="grid grid-cols-2 gap-x-4">
+          <Button tonal>
+            <Link href="/forgot-password">Cambiar contraseña</Link>
+          </Button>
+          <Button tonal>
+            <Link href="/register">Registrarse</Link>
+          </Button>
+        </div>
+      </Block>
     </>
   );
 }

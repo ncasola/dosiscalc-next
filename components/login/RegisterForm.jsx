@@ -1,7 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { List, ListInput, Fab } from "konsta/react";
+import { List, ListInput, Button } from "konsta/react";
 import {
   MdSupervisedUserCircle,
   MdPassword,
@@ -43,8 +43,8 @@ const RegisterForm = ({ processRegister }) => {
 
   return (
     <>
-      <form>
-        <List strong inset>
+      <form className="w-full">
+        <List>
           <Controller
             name="name"
             control={control}
@@ -100,6 +100,14 @@ const RegisterForm = ({ processRegister }) => {
         <input type="hidden" {...register("hcaptcha")} />
         <p className="text-center text-red-500">{errors.hcaptcha?.message}</p>
         <div className="flex justify-center">
+          <Button
+            className="w-auto mb-4"
+            onClick={handleSubmit(processRegister)}
+          >
+            <MdOutlineSendToMobile /> Registrarse
+          </Button>
+        </div>
+        <div className="flex justify-center mt-4">
         <HCaptcha
           sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY}
           onLoad={onLoad}
@@ -109,12 +117,6 @@ const RegisterForm = ({ processRegister }) => {
         />
         </div>
       </form>
-      <Fab
-        className="fixed left-1/2 bottom-4-safe transform -translate-x-1/2 z-20"
-        onClick={() => handleSubmit(processRegister)()}
-        icon={<MdOutlineSendToMobile />}
-        text="Registrarse"
-      />
     </>
   );
 };

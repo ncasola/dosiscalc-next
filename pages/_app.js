@@ -1,6 +1,7 @@
-import { SessionProvider, useSession, signIn} from "next-auth/react";
+import { SessionProvider, useSession} from "next-auth/react";
 import { Provider } from "react-redux";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 // store and components
 import { store } from "@/store";
@@ -37,11 +38,12 @@ const Auth = ({ children }) => {
   // hooks
   const { data: session, status } = useSession();
   const isUser = !!session?.user;
+  const router = useRouter();
   // effects
   useEffect(() => {
     if (status === "loading") return;
-    if (!isUser) signIn();
-  }, [isUser, status]);
+    if (!isUser) router.push("/login");
+  }, [isUser, status, router]);
 
   if (isUser) {
     return children;

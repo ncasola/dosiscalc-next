@@ -10,18 +10,17 @@ import {
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useEffect, useRef, useState } from "react";
 
-const LoginForm = ({ csrfToken, processLogin }) => {
+const ForgotForm = ({ processForgot }) => {
   const [token, setToken] = useState(null);
   const captchaRef = useRef(null);
   const validationSchema = Yup.object().shape({
-    // yup email validation
     email: Yup.string()
       .email("El email es incorrecto")
       .required("El email es obligatorio"),
-    password: Yup.string().required("La contraseña es obligatoria"),
     hcaptcha: Yup.string().required("El captcha es obligatorio"),
   });
-  const formOptions = { resolver: yupResolver(validationSchema) };
+  const formOptions = { resolver: yupResolver(validationSchema), mode: "onTouched", reValidateMode: "onChange" };
+
   const {
     register,
     reset,
@@ -57,37 +56,19 @@ const LoginForm = ({ csrfToken, processLogin }) => {
                 type="text"
                 placeholder="Email"
                 media={<MdSupervisedUserCircle />}
-                error={errors.name?.message}
-              />
-            )}
-          />
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ListInput
-                outline
-                {...field}
-                label="Contraseña"
-                type="password"
-                placeholder="Contraseña"
-                media={<MdPassword />}
-                error={errors.password?.message}
+                error={errors.email?.message}
               />
             )}
           />
         </List>
-        <input type="hidden" name="csrfToken" value={csrfToken} />
         <input type="hidden" {...register("hcaptcha")} />
         <p className="text-center text-red-500">{errors.hcaptcha?.message}</p>
         <div className="flex justify-center">
           <Button
             className="w-auto mb-4"
-            onClick={handleSubmit(processLogin)}
+            onClick={handleSubmit(processForgot)}
           >
-            <MdOutlineSendToMobile /> Iniciar sesión
+            <MdOutlineSendToMobile /> Registrarse
           </Button>
         </div>
         <div className="flex justify-center mt-4">
@@ -104,4 +85,4 @@ const LoginForm = ({ csrfToken, processLogin }) => {
   );
 };
 
-export default LoginForm;
+export default ForgotForm;
