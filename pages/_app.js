@@ -2,6 +2,7 @@ import { SessionProvider, useSession} from "next-auth/react";
 import { Provider } from "react-redux";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { Analytics } from '@vercel/analytics/react';
 
 // store and components
 import { store } from "@/store";
@@ -22,11 +23,13 @@ export default function MyApp({
             <Auth>
               <Layout>
                 <Component {...pageProps} />
+                <Analytics />
               </Layout>
             </Auth>
           ) : (
             <Layout>
               <Component {...pageProps} />
+              <Analytics />
             </Layout>
           )}
       </Provider>

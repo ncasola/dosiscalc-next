@@ -54,12 +54,12 @@ export default function Login({ csrfToken }) {
       <BlockTitle className="text-center mt-4">Enlaces</BlockTitle>
       <Block inset className="space-y-2">
         <div className="grid grid-cols-2 gap-x-4">
-          <Button tonal>
-            <Link href="/forgot-password">Cambiar contraseña</Link>
-          </Button>
-          <Button tonal>
-            <Link href="/register">Registrarse</Link>
-          </Button>
+            <Link href="/forgot-password">
+              <Button tonal>Cambiar contraseña</Button>
+            </Link>
+            <Link href="/register">
+              <Button tonal>Registrarse</Button>
+            </Link>
         </div>
       </Block>
     </>
